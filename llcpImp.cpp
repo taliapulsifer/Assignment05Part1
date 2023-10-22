@@ -7,32 +7,50 @@ using namespace std;
 // (put at near top to facilitate printing and grading)
 void propTarget(Node*& headPtr, int target)
 {
-    //Set a bool flag to keep track of whether we have found the target or not
+    //Check to see if the list is empty FIRST
+    if (headPtr == nullptr) {
+        //This means that the list is empty. Create a new Node and 
+        //assign it as the head
+        headPtr = new Node;
+        headPtr->data = target;
+        headPtr->link = nullptr;
+        return;
+    }
+
     Node* previous = nullptr;
     Node* current = headPtr;
     Node* head = headPtr;
+    Node* next = current->link;
 
-    //Check to see if the list is empty FIRST
-    if (headPtr->link == nullptr) {
-        //This means that the list is empty. Create a new Node and 
-        //assign it as the head
-        Node* nodeToAdd = new Node;
-        nodeToAdd->data = target;
-        nodeToAdd->link = nullptr;
-        return;
-    }
     //If the list is not empty:
     //While we have not reached the end of the list
     //(The tail has a null pointer for the link)
-    while (current->link != nullptr)
+    while (current != nullptr)
     {   //Traverse the list from beggining (headPtr) to the end (tail)
         if (current->data == target)
         {
-            Node* temp = head;
-            head = current; 
-            previous = current->link;
-            current->link = temp;
-            current = previous->link;
+            //Node* temp = head;
+            //head = current; 
+            //if (previous != nullptr)
+            //    previous->link = current->link;
+            //current->link = temp;
+            //{
+            //    current = previous->link;
+            //}
+            //else
+            //{
+            //    current = nullptr;
+            //}
+            // 
+            //Create a temporary Node with current value (the one we want to move)
+            Node* temp = current;
+            //Move previous link to the currents link
+            if(current != NULL)
+                previous->link = current->link;
+            //The current's link is now the 'next'
+            current->link = next;
+            //Temp points to the head
+            temp->link = head;
 
         }
         //Set the previous to current so when it iterates
