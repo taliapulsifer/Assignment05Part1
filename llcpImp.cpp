@@ -5,41 +5,56 @@ using namespace std;
 
 // definition of PropTarget
 // (put at near top to facilitate printing and grading)
-void propTarget(Node* headPtr, int target)
+void propTarget(Node*& headPtr, int target)
 {
     //Set a bool flag to keep track of whether we have found the target or not
-    bool found = false;
+    Node* previous = nullptr;
+    Node* current = headPtr;
+    Node* head = headPtr;
+
     //Check to see if the list is empty FIRST
     if (headPtr->link == nullptr) {
-        //This means that the list is empt. Create a new Node and 
+        //This means that the list is empty. Create a new Node and 
         //assign it as the head
-
+        Node* nodeToAdd = new Node;
+        nodeToAdd->data = target;
+        nodeToAdd->link = nullptr;
+        return;
     }
-    //Create a new node to keep track of the previous Node
-    Node* temp = headPtr;
     //If the list is not empty:
     //While we have not reached the end of the list
     //(The tail has a null pointer for the link)
-    while (temp->link != nullptr)
+    while (current->link != nullptr)
     {   //Traverse the list from beggining (headPtr) to the end (tail)
-        if (temp->data == target)
+        if (current->data == target)
         {
-            found = true;
+            Node* temp = head;
+            head = current; 
+            previous = current->link;
+            current->link = temp;
+            current = previous->link;
+
         }
-        if (temp->link->link == nullptr && temp->data != target)
-        {
-            //Target was not found in the entire list.
-            //Create and append a new node holding the target data
-
-            Node* nodeToAdd = new Node{};
-        }
-
-
-        //Set the previous to the head pointer so when it iterates
+        //Set the previous to current so when it iterates
         //it holds the new previous
-        temp = temp->link;
-
+        else 
+        {
+            previous = current;
+            current = current->link;
+        }
     }
+    //If it reaches outside the while and it has
+    //not found the target, that means create a new 
+    //node and append it top the end of the list
+    if (headPtr == head)
+    {
+        Node* nodeToAdd = new Node;
+        nodeToAdd->data = target;
+        current->link = nodeToAdd;
+        nodeToAdd->link = nullptr;
+    }
+
+    headPtr = head;
 }
 
 int FindListLength(Node* headPtr)

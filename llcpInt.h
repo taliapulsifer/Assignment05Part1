@@ -22,7 +22,7 @@ double FindAverage(Node* headPtr);
 void   ListClear(Node*& headPtr, int noMsg = 0);
 
 // prototype of PropTarget of Assignment 5 Part 1
-void propTarget(Node* headPtr, int target);
+void propTarget(Node*& headPtr, int target);
 
 
 #endif
