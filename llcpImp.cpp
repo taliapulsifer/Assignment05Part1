@@ -8,9 +8,8 @@ using namespace std;
 void propTarget(Node* headPtr, int target)
 {
     //Set a bool flag to keep track of whether we have found the target or not
-    bool found = false;
     Node* previous = new Node;
-    Node* temp = headPtr;
+    Node* temp = nullptr;
 
     //Check to see if the list is empty FIRST
     if (headPtr->link != nullptr) {
@@ -26,7 +25,6 @@ void propTarget(Node* headPtr, int target)
     {   //Traverse the list from beggining (headPtr) to the end (tail)
         if (temp->data == target)
         {
-            found = true;
             //Do not make a new node, move all matching
             //to the front
         }
