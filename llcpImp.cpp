@@ -25,32 +25,23 @@ void propTarget(Node*& headPtr, int target)
     //If the list is not empty:
     //While we have not reached the end of the list
     //(The tail has a null pointer for the link)
-    while (current != nullptr)
+    while (nullptr != current)
+        //Constant should always be on the left hand side for 
+        //comparison operators
+
     {   //Traverse the list from beggining (headPtr) to the end (tail)
-        if (current->data == target)
+        if (current->data == target && nullptr != previous)
         {
-            //Node* temp = head;
-            //head = current; 
-            //if (previous != nullptr)
-            //    previous->link = current->link;
-            //current->link = temp;
-            //{
-            //    current = previous->link;
-            //}
-            //else
-            //{
-            //    current = nullptr;
-            //}
-            // 
             //Create a temporary Node with current value (the one we want to move)
             Node* temp = current;
             //Move previous link to the currents link
-            if(current != NULL)
-                previous->link = current->link;
+            previous->link = current->link;
             //The current's link is now the 'next'
             current->link = next;
             //Temp points to the head
             temp->link = head;
+
+            //Only one thing in the list
 
         }
         //Set the previous to current so when it iterates
@@ -64,7 +55,7 @@ void propTarget(Node*& headPtr, int target)
     //If it reaches outside the while and it has
     //not found the target, that means create a new 
     //node and append it top the end of the list
-    if (headPtr == head)
+    if (headPtr == head && head->data != target)
     {
         Node* nodeToAdd = new Node;
         nodeToAdd->data = target;
