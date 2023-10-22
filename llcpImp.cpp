@@ -8,12 +8,12 @@ using namespace std;
 void propTarget(Node*& headPtr, int target)
 {
     //Check to see if the list is empty FIRST
-    if (headPtr == nullptr) {
+    if (nullptr == headPtr) {
         //This means that the list is empty. Create a new Node and 
         //assign it as the head
         headPtr = new Node;
-        headPtr->data = target;
         headPtr->link = nullptr;
+        headPtr->data = target;
         return;
     }
 
@@ -32,14 +32,11 @@ void propTarget(Node*& headPtr, int target)
     {   //Traverse the list from beggining (headPtr) to the end (tail)
         if (current->data == target && nullptr != previous)
         {
-            //Create a temporary Node with current value (the one we want to move)
-            Node* temp = current;
-            //Move previous link to the currents link
+            Node* temp = head;
+            head = current;
             previous->link = current->link;
-            //The current's link is now the 'next'
-            current->link = next;
-            //Temp points to the head
-            temp->link = head;
+            current->link = temp;
+            current = previous->link;
         }
         //Set the previous to current so when it iterates
         //it holds the new previous
@@ -54,10 +51,9 @@ void propTarget(Node*& headPtr, int target)
     //node and append it top the end of the list
     if (head->data != target)
     {
-        Node* nodeToAdd = new Node;
-        nodeToAdd->data = target;
-        current->link = nodeToAdd;
-        nodeToAdd->link = nullptr;
+        previous->link = new Node;
+        previous->link->data = target;
+        previous->link->link = nullptr;
     }
 
     headPtr = head;
