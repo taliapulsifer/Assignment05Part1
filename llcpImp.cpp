@@ -8,16 +8,15 @@ using namespace std;
 void propTarget(Node* headPtr, int target)
 {
     //Set a bool flag to keep track of whether we have found the target or not
-    Node* previous = new Node;
-    Node* temp = nullptr;
-
+    bool found = false;
     //Check to see if the list is empty FIRST
-    if (headPtr->link != nullptr) {
+    if (headPtr->link == nullptr) {
         //This means that the list is empt. Create a new Node and 
         //assign it as the head
 
     }
     //Create a new node to keep track of the previous Node
+    Node* temp = headPtr;
     //If the list is not empty:
     //While we have not reached the end of the list
     //(The tail has a null pointer for the link)
@@ -25,20 +24,21 @@ void propTarget(Node* headPtr, int target)
     {   //Traverse the list from beggining (headPtr) to the end (tail)
         if (temp->data == target)
         {
-            //Do not make a new node, move all matching
-            //to the front
+            found = true;
         }
+        if (temp->link->link == nullptr && temp->data != target)
+        {
+            //Target was not found in the entire list.
+            //Create and append a new node holding the target data
+
+            Node* nodeToAdd = new Node{};
+        }
+
 
         //Set the previous to the head pointer so when it iterates
         //it holds the new previous
         temp = temp->link;
-    }
-    if (found == false)
-    {
-        //This means that the targetr value was not found
-        Node* nodeToAdd = new Node;
-        temp->link = nodeToAdd;
-        nodeToAdd->link = nullptr;
+
     }
 }
 
