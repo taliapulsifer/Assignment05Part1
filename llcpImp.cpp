@@ -40,9 +40,6 @@ void propTarget(Node*& headPtr, int target)
             current->link = next;
             //Temp points to the head
             temp->link = head;
-
-            //Only one thing in the list
-
         }
         //Set the previous to current so when it iterates
         //it holds the new previous
@@ -55,7 +52,7 @@ void propTarget(Node*& headPtr, int target)
     //If it reaches outside the while and it has
     //not found the target, that means create a new 
     //node and append it top the end of the list
-    if (headPtr == head && head->data != target)
+    if (head->data != target)
     {
         Node* nodeToAdd = new Node;
         nodeToAdd->data = target;
